@@ -9,7 +9,10 @@
 document.ready = function(){
 
 var calculator = document.getElementById('calculator');
+
 var screen = document.getElementById('screen'); 
+
+var calc = new Calculator(); 
 
 calculator.addEventListener('click', function(event){
 	if (event.target.nodeName == 'LI'){  // list item was clicked
@@ -74,8 +77,6 @@ Calculator.prototype = {
 		this.array = [];
 	}
 };
-
-var calc = new Calculator(); 
 
 document.addEventListener('keydown',function(event){
 	
