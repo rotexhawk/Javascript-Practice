@@ -1,8 +1,8 @@
 /**
 *  Javascript Calculator
 *  Author: Yasin Yaqoobi
-*  Project Goal: Utilize Event propogation and Object Creation.
-*  
+*  Project Goal: Utilize Event propogation and Object Creation. Shhh Eval is your friend this time!
+*  Be careful! There is no security check for eval. 
 **/
 
 
@@ -87,7 +87,6 @@ document.addEventListener('keydown',function(event){
 });
 
 screen.addEventListener('keyup',function(event){
-	console.log('this is working ' + this.innerHTML);
 	calc.array = this.innerHTML.split(''); 
 });
 
