@@ -13,8 +13,9 @@
 		<button class="add-task primary">+</button>
 	</div>
 
-		<div class="task row">
-			<p class="description col-11">This is the task description</p>
+		<div class="task row" data-completed="true">
+			<button class="completed round-botton">&#10004;</button>
+			<p class="description col-11"><span class="text">This is the task description</span></p>
 			<button class="status danger remove-task">X</button>
 		</div>
 
@@ -24,13 +25,16 @@
 		<button class="add-task primary">+</button>
 	</div>
 
-		<div class="task row">
-			<p class="description col-11">This is the task description</p>
+		<div class="task row" data-completed="false">
+		<button class="completed round-botton">&#10004;</button>
+			<p class="description col-11"><span class="text">This is the task description</span></p>
 			<button class="status danger remove-task">X</button>
 		</div>
 
 	</div><!-- todo container -->
 </div>
+<script src="npo.js"></script>
 <script src="pollyfill.js"></script>
 <script src="index.js"></script>
+<script src="drag.js"></script>
 </body>

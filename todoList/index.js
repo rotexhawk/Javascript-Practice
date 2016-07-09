@@ -3,8 +3,7 @@
 *  Author: Yasin Yaqoobi
 *  Project Goal: Practice Dom Manipulation. Traversing the Dom and adding new Elements
 *  Date: 07/07/16
-*  Bugs: We are cloning the existent task so if you remove all task can't add anything back because there is *  nothing to clone. 
-*  Feature to be added: Drag and Drop, use of promises. Date based organization. Changing tasks to objects.
+*  Feature to be added: Drag and Drop. Date based organization. Changing tasks to objects.
 **/
 
 
@@ -12,40 +11,66 @@ document.ready = function(){
 
 	var container = document.getElementById('todo-container');
 	var addButtons = document.getElementsByClassName('add-task');
-	var removeButtons = document.getElementsByClassName('remove-task');
+	
 	var modal = createModal();
-	var task,newTask; 
-
+	
 	Array.prototype.forEach.call(addButtons,addTask);
-	Array.prototype.forEach.call(removeButtons,removeTask);
-
+	
+	taskButtonListeners();
 
 	closeModal(); 
-	submitListener(); 
+
 
 function addTask(elm){
 	elm.addEventListener('click',function(event){
-
+			
+			var task,newTask; 
+			
 			modal.style.visibility = 'visible';
 
 			task = node_after(elm.parentNode); // otherwise we would have to do elm.parentNode.nextSibling.nextSibling on gecko based browsers. i.e chrome.
 
-			newTask = task.cloneNode(true); 
+			newTask = makeEmptyTask(); 
+
+
+
+			var p1 = getFormValue(); 
+			
+			p1.then(function(output){
+				newTask.getElementsByClassName('description')[0].innerHTML = '<span class="text">' + output + '</span>';  // get the value from the modal popup and add it to the new task. 
+				
+				container.insertBefore(newTask,task); // Insert it at the top.
+			});
 
 		});
 }
 
+function makeEmptyTask(){
+	var elm = document.createElement('div'); 
+	elm.className = 'task row';
+	elm.setAttribute('data-completed','false');
+	elm.innerHTML = '<button class="completed round-botton">&#10004;</button><p class="description col-11"></p><button class="status danger remove-task">X</button>';
 
-function removeTask(elm){
-	elm.addEventListener('click',function(event){
+	return elm;
+}
 
-			var toRemove = elm.parentNode; 
-		
-			if (toRemove.parentNode && elm.parentNode.parentNode.id == 'todo-container'){ 
-				container.removeChild(toRemove);
-				}
 
-		});
+function taskButtonListeners(){
+	container.addEventListener('click',function(event){
+		if (event.target.className.includes('remove-task')){ // remove button is clicked
+			
+			container.removeChild(event.target.parentNode);
+		}
+		else if (event.target.className.includes('completed')){ // complete button clicked
+			var thisTask = event.target.parentNode; 
+			if (thisTask.dataset.completed == 'false'){ 
+			thisTask.dataset.completed = "true";
+			}
+			else{
+				thisTask.dataset.completed = 'false';
+			}
+		}
+	});
 }
 
 
@@ -70,18 +95,21 @@ function closeModal(){
 	});
 }
 
-function submitListener(){
-	var myTask; 
+function submitListener(cb){
+	
 	document.querySelector('input[type="submit"]').addEventListener('click',function(event){
 		event.preventDefault(); 
-		myTask = document.querySelector('textarea').value; 
 		modal.style.visibility = 'hidden';
-		newTask.getElementsByClassName('description')[0].innerHTML = myTask;
-		container.insertBefore(newTask,task);
-		Array.prototype.forEach.call(removeButtons,removeTask);
+		cb(document.querySelector('textarea').value);
 	});
 }
 
+
+function getFormValue(){
+	return new Promise(function executor(resolve,error){
+		submitListener(resolve);
+	});	
+}
 
 }();
 
