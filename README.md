@@ -1,6 +1,6 @@
 # Javascript-Practice
 
-These practice excersices intentionally skips browser quirks and security issues etc, so a begginer user can easily follow them. Please don't implement them on production environment. 
+These excersices intentionally skip browser quirks and security issues etc, so a begginer user can easily follow them. Please don't implement them on production environment. 
 
 
 ### Calculator
