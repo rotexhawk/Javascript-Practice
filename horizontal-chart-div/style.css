@@ -1,0 +1,59 @@
+
+.container{
+	width: 1200px;
+	box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+	-webkit-box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+	-moz-box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+	overflow: hidden;
+	margin: 0 auto; 
+	padding: 5%;
+}
+.charts-container{
+	width: 80%;
+	text-align: center;
+	border-left: 1px solid gray; 
+	border-bottom: 1px solid gray; 
+	overflow: hidden;
+	display: block;
+}
+.charts-area{
+	position: relative;
+}
+
+#yAxis{
+	position: absolute;
+	left: 0; 
+	top: 0;
+}
+
+#xAxis{
+	position: absolute;
+}
+#xAxis ul{
+	padding-left: 0;
+}
+#xAxis li{
+	display: inline-block;
+	list-style-type: none; 
+	width: 9.09%;
+}
+
+.charts-container .chart{
+	min-height: 40px; 
+	margin-bottom: 10px;
+	width: 0;
+	transition-duration: 2s;
+	transition-property: width;
+}
+
+#usa{
+	background-color: red; 
+}
+
+#china{
+	background-color: blue;
+}
+
+#russia{
+	background-color: green; 
+}

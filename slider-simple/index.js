@@ -22,20 +22,25 @@ document.ready = function(){
 	
 	function startSlider(){
 		if (position == 3){
+			slides[position].style.transition = '0s';
 			slides[position].style.opacity = 0;	
 			slides[position].style.visibility = 'hidden';
 
 			position = 0; 
+
+			slides[position].style.transition = '2s';
 			slides[position].style.visibility = 'visible'; 
 			slides[position].style.opacity = 1;	
 		}
 
 		else{
+			slides[position].style.transition = '0s';
 			slides[position].style.opacity = 0;	
 			slides[position].style.visibility = 'hidden';
 
 			position ++; 
 
+			slides[position].style.transition = '2s';
 			slides[position].style.visibility = 'visible'; 
 			slides[position].style.opacity = 1;	
 		}
@@ -66,8 +71,12 @@ document.ready = function(){
 
 	}
 
-	function removePreviousStyle(styleName, styleVal){
-		console.log('removeStyle ' + styleName);
+/**
+* This method changes the specified style from all the list elements. 
+* You pass in styleName and Value to change. If not value is provided it is set to inherit.
+*
+**/
+	function changeStyle(styleName, styleVal){
 		var val = styleVal || 'inherit';
 		Array.prototype.forEach.call(slides, function(elm){
 			elm.style[styleName] = val;
@@ -100,7 +109,9 @@ document.ready = function(){
 			
 		});
 
-
+/** This method get's called when the slide buttons are clicked. It clears the previous interval 
+** 
+**/
 		function restartSlider(buttonId){
 
 			clearInterval(mySlides);  // we remove the interval i.e stop the slider 
@@ -128,16 +139,22 @@ document.ready = function(){
 
 
 	function changeEffect(name){
-		clearInterval(mySlides);  // we remove the interval i.e stop the slider 
-
+	
 		if (name === 'fade'){
+			changeStyle('left','0px');
+			changeStyle('visibility', 'hidden');
+			changeStyle('transition', '2s');
+			clearInterval(mySlides);  // we remove the interval i.e stop the slider 
+
 			mySlides = setInterval(startSlider,4000); 
 		}
 
 		else if (name === 'slide'){
-			removePreviousStyle('opacity');
-			removePreviousStyle('visibility');
-			removePreviousStyle('left','1200px');
+			changeStyle('opacity');
+			changeStyle('visibility');
+			changeStyle('left','1200px');
+			clearInterval(mySlides);  // we remove the interval i.e stop the slider 
+
 			mySlides = setInterval(startSliderWithSlideEffect,4000); 
 		}
 	}

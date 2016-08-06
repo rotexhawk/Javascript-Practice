@@ -47,9 +47,7 @@ function Calculator(){
 	this.array = [];
 	this.results = 0;
 }
-Calculator.prototype = {
-
-	calculate: function(){	
+Calculator.prototype.calculate = function(){	
 		try{
 		results = eval(this.array.join(''));
 		this.array = [results];
@@ -59,24 +57,23 @@ Calculator.prototype = {
 			alert('Wrong arguments provided');
 			return this.array.join('');
 		}
-	},
+	}
 
-	isNumber: function(str){
+Calculator.prototype.isNumber = function(str){
 		return !isNaN(parseFloat(str)) && isFinite(str);
-	},
+	};
 
-	addToOperationsArray: function(str){
+Calculator.prototype.addToOperationsArray = function(str){
 		if (this.array.length <= 0 && !this.isNumber(str)){ // Don't add operand before any number.
 			return; 
 		}
 		
 		this.array.push(str);
 		
-	},
-	clearEverything: function(){
+	};
+Calculator.prototype.clearEverything = function(){
 		this.array = [];
-	}
-};
+	};
 
 document.addEventListener('keydown',function(event){
 	
