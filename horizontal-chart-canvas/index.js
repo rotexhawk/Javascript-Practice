@@ -83,60 +83,65 @@ function setupCanvas(chart){
 
 
 function drawHorizontalChart(chart){
+	drawFrame();
 	drawXAxis(chart);
+	drawYAxis(chart);
+	drawChartTitle(chart); 
+	var barValue; 
+	var position = {x:canvasData.beginX+1, y: 0};
+
+	for (var i = chart.data.labels.length-1; i >= 0; i--){
+		
+		for (var n = 0; n <= chart.data.datasets[0].data[i]; n+=0.4){
+			setTimeout(function(index, count){
+				if (index == 0){
+					position.y += canvasData.marginBottom + canvasData.barHeight;
+					barValue = chart.data.datasets[0].data[count];
+					setTooltip(canvasData.beginX, barValue * canvasData.scaleRatio + canvasData.yLabelsWidth,position.y, position.y + canvasData.barHeight, chart.data.labels[count], count, barValue);
+				}
+				ctx.fillStyle = chart.data.datasets[0].backgroundColor[count]; 
+				console.log(index);
+				ctx.fillRect(position.x, position.y, index * canvasData.scaleRatio , canvasData.barHeight);
+
+				
+
+			}, 1000, n, i); 
+
+
+		}
+
+	}
+
+}
+
+function drawChartTitle(chart){
+	ctx.font = "16px serif";
+	ctx.fillText(chart.data.datasets[0].label, (canvasData.innerWidth)/2, canvasData.legendsHeight / 2);
+	
+}
+
+function drawFrame(){
 	ctx.beginPath();
 	ctx.moveTo(canvasData.beginX, canvasData.beginY);   // (30, 15)
 	ctx.lineTo(canvasData.beginX, canvasData.endY); // (30,385)
 	ctx.lineTo(canvasData.endX, canvasData.endY); // (1000,385)
 	ctx.stroke();
-
-	ctx.font = "16px serif";
-	ctx.fillText(chart.data.datasets[0].label, (canvasData.innerWidth)/2, canvasData.legendsHeight / 2);
-	
-	var position = {x:canvasData.beginX+1, y:canvasData.beginY+5};
-	var first = true; 	
-
-	var count = chart.data.labels.length-1; // last label on the chart
-	var barValue; 
-
-	for (var i = chart.data.labels.length-1; i >= 0; i--){
-		barValue = chart.data.datasets[0].data[i];
-		for (var n = 20; n < barValue * canvasData.scaleRatio; n+=0.2){
-		(function (ratio, barValue){
-			setTimeout(function(){
-				
-				if (first){
-					
-					drawYLabels(chart, count, position);
-					ctx.fillStyle = chart.data.datasets[0].backgroundColor[count]; 
-
-					setTooltip(canvasData.beginX, barValue * canvasData.scaleRatio + canvasData.yLabelsWidth, position.y, position.y + canvasData.barHeight, chart.data.labels[count], count, barValue);
-
-				    count--;
-				    first = false;
-				}
-
-				else if (ratio === 20){
-
-					position.y += canvasData.marginBottom + canvasData.barHeight;
-					drawYLabels(chart, count, position);
-					ctx.fillStyle = chart.data.datasets[0].backgroundColor[count]; 
-
-					setTooltip(canvasData.beginX, barValue * canvasData.scaleRatio + canvasData.yLabelsWidth,position.y, position.y + canvasData.barHeight, chart.data.labels[count], count, barValue);
-
-				    count--;
-				  
-				 }
-				
-				ctx.fillRect(position.x,position.y, ratio, canvasData.barHeight);
-
-			}, 1000);
-		})(n, barValue);
-	}	
-		
-	}
 }
 
+function drawYAxis(chart){
+	ctx.fillStyle = 'black';
+	ctx.font = "14px serif";
+	var label; 
+	var yPos = canvasData.beginY + canvasData.legendsHeight / 2 + 5; 
+
+	for (var i = chart.data.labels.length-1; i >= 0; i--){
+
+		label = chart.data.labels[i]; 
+
+		ctx.fillText(label, 0, yPos); 
+		yPos += canvasData.barHeight + canvasData.marginBottom; 
+	}
+}
 
 function drawXAxis(chart){
 	
@@ -145,25 +150,14 @@ function drawXAxis(chart){
 	ctx.fillStyle = 'black';
 	ctx.font = "12px serif";
 
-	var xPos = canvasData.yLabelsWidth; 
+	var xPos = canvasData.yLabelsWidth + canvasData.barHeight; 
 
 	for (var i = 0; i <= canvasData.maxValue; i+= 50){
 		xPos = canvasData.yLabelsWidth + (textRatio * i);
 		ctx.fillText(i, xPos, canvasData.endY + canvasData.legendsHeight / 2); 
-		
-		console.log(xPos);
 	
 	}
 
-}
-
-
-
-
-function drawYLabels(chart, count, position){
-	ctx.fillStyle = 'black';
-	ctx.font = "16px serif";
-	ctx.fillText(chart.data.labels[count], 0, position.y + canvasData.barHeight / 2);
 }
 
 
@@ -191,7 +185,7 @@ $('#myChart').mousemove(function(event){
 
 			if ($('#toolTip').length <= 0){
 			
-				var toolTip = $('<div id="toolTip">' + posObj.label + ' : ' + posObj.value + '</div>'); 
+				var toolTip = $('<div id="toolTip">' + posObj.label + ': ' + posObj.value + '</div>'); 
 					toolTip.css({
 						'position': 'absolute', 
 						'display': 'block', 
@@ -241,12 +235,12 @@ $(document).ready(function(){
 				{
 					label: 'Progress Chart',
 					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
-		                'rgba(54, 162, 235, 0.2)',
-		                'rgba(152, 133, 255, 0.2)',
-		                'rgba(135, 199, 232, 0.2)',
-		                'rgba(54, 162, 235, 0.2)',
-		                'rgba(135, 199, 232, 0.2)',
+						'rgb(255, 99, 132)',
+		                'rgb(54, 162, 235)',
+		                'rgb(152, 133, 255)',
+		                'rgb(135, 199, 232)',
+		                'rgb(54, 162, 235)',
+		                'rgb(135, 199, 232)',
 		               
 	                ], 
 	                 borderColor: [
