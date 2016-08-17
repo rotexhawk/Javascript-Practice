@@ -1,0 +1,154 @@
+
+.container{
+	width: 600px;
+	box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+	-webkit-box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+	-moz-box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+	overflow: hidden;
+	margin: 0 auto; 
+	padding: 5%;
+}
+
+.center-text{
+	text-align: left; 
+}
+
+.underline{
+	border-bottom: 1px solid black;
+}
+.underline-text{
+	text-decoration: underline;
+}
+
+.row{
+	clear: both; 
+	overflow: hidden;
+	display: block; 
+	width: 100%;
+}
+
+.col-11{
+	float: left;
+	width: 90%;
+}
+.col-11.description{
+	width: 84%;
+	cursor: move;
+}
+
+span.text{
+	cursor: initial;
+}
+
+.col-10{
+	float: left; 
+	width: 80%;
+}
+
+.col-2{
+	float: left;
+	width: 20%;
+}
+
+button, .button{
+	border-radius: 4px; 
+	border: 1px solid transparent;
+	border-radius: 4px; 
+	    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+button.danger{
+	background-color: #d9534f;
+	border-color: #d9534f;
+	color: white; 
+	
+}
+
+button.primary, .button.primary{
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+}
+
+.task{
+	border-bottom: 1px solid #d8d7d7;
+	position: relative;
+}
+.task[data-completed="true"] p{
+	text-decoration: line-through;
+}
+
+.task p{
+	margin-bottom: 5px; 
+}
+.task .status, .add-task{
+	vertical-align: middle; 
+	position: absolute;
+	top: 50%; 
+	transform: translateY(-50%);
+}
+
+.task-date{
+	color: #5bc0de;
+	text-transform: uppercase;
+	letter-spacing: 0.6px;
+	font-size: 16px;
+}
+
+.task-date-container{
+	overflow: hidden;
+    position: relative;
+    margin-top: 50px;
+}
+
+#modal{
+	width: 400px; 
+	min-height: 250px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 30%;
+	margin: 0 auto;
+	box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+    background: white;
+    padding: 50px;
+    visibility: hidden;
+}
+textarea{
+	min-height: 65px;
+}
+input{
+	padding: 5px 2px;
+}
+input[type="submit"]{
+	font-size: 0.9em;
+	padding: 10px;
+}
+input, textarea{
+	width: 100%; 
+	margin-bottom: 20px; 
+}
+
+label{
+	padding-bottom: 10px;
+}
+
+.round-botton{
+	border-radius: 50%;
+    padding: 4px 6px;
+}
+button.completed{
+	float: left;
+    margin-top: 11px;
+    margin-left: 2px;
+    margin-right: 10px;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+    color: white;
+}
+
+
