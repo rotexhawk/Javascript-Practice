@@ -1,0 +1,133 @@
+<svg version="1.1" id="cycler_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="600px" height="200px" viewBox="0 0 600 200" enable-background="new 0 0 600 200" xml:space="preserve">
+<g>
+    <g>
+        <path fill="#FFFFFF" d="M371.952,159.345c0-12.702-10.337-23.76-25.612-29.539v6.624c-3.825-1.256-8.844-5.068-26.204-5.068
+            c-7.503,0-13.609,2.989-13.609,9.368c0,14.86,46.07,13.521,46.07,34.174c0,8.989-6.795,14.333-16.934,16.969
+            C356.603,187.863,371.952,174.823,371.952,159.345z"/>
+        <path fill="#FFFFFF" d="M300.445,130.671h-4.772c-2.331,0.99-4.532,2.105-6.582,3.334h6.182
+            C296.68,132.734,298.403,131.617,300.445,130.671z"/>
+        <path fill="#FFFFFF" d="M292.591,137.256h-8.243c-1.347,1.057-2.605,2.168-3.755,3.333h10.675
+            C291.544,139.407,291.985,138.295,292.591,137.256z"/>
+        <path fill="#FFFFFF" d="M290.948,143.815H277.79c-0.824,1.079-1.565,2.192-2.215,3.334h15.902
+            C291.155,146.111,290.976,145.001,290.948,143.815z"/>
+        <path fill="#FFFFFF" d="M293.057,150.378h-19.055c-0.442,1.089-0.804,2.201-1.083,3.333h23.239
+            C294.936,152.696,293.887,151.592,293.057,150.378z"/>
+        <path fill="#FFFFFF" d="M301.135,156.961h-28.781c-0.082,0.788-0.137,1.581-0.137,2.384c0,0.318,0.021,0.634,0.035,0.949h36.483
+            C306.049,159.285,303.464,158.195,301.135,156.961z"/>
+        <path fill="#FFFFFF" d="M319.283,186.273c6.139,0,12.207-0.115,15.401-3.044h-36.588
+            C303.636,184.748,311.459,186.273,319.283,186.273z"/>
+        <path fill="#FFFFFF" d="M336.997,177.233c0-0.2-0.011-0.396-0.025-0.588H279.24c1.019,1.155,2.142,2.27,3.352,3.331h54.056
+            C336.872,179.17,336.997,178.261,336.997,177.233z"/>
+        <path fill="#FFFFFF" d="M332.81,170.108h-57.997c0.563,1.142,1.213,2.253,1.947,3.332h59.193
+            C335.23,172.209,334.155,171.109,332.81,170.108z"/>
+        <path fill="#FFFFFF" d="M318.016,163.522h-45.408c0.207,1.13,0.494,2.241,0.859,3.335h53.465
+            C324.23,165.671,321.176,164.596,318.016,163.522z"/>
+        <path fill="#FFFFFF" d="M296.022,187.49v-4.213h-9.217C289.674,184.797,292.765,186.203,296.022,187.49z"/>
+    </g>
+     
+     <path fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" d="M393.556,180.477
+        c3.219-6.313,4.988-13.166,4.988-20.329c0-31.438-33.975-56.925-75.886-56.925c-41.911,0-75.886,25.486-75.886,56.925
+        c0,7.163,1.769,14.016,4.989,20.329"/> <!-- round dom -->
+
+
+
+     <line fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" x1="246.76" y1="155.039" x2="219.679" y2="153.901"/>     
+
+      <g class="knowledge">
+        <path fill="#FFFFFF" d="M204.082,138.478c7.48,0,13.565,6.086,13.565,13.566c0,7.481-6.085,13.567-13.565,13.567
+            c-7.482,0-13.569-6.086-13.569-13.567C190.513,144.563,196.6,138.478,204.082,138.478 M204.082,133.478
+            c-10.256,0-18.569,8.312-18.569,18.566c0,10.254,8.313,18.567,18.569,18.567c10.254,0,18.565-8.313,18.565-18.567
+            C222.647,141.789,214.336,133.478,204.082,133.478L204.082,133.478z"/>
+              <circle class="circle" cx="204.082" cy="152" r="14" stroke="white" stroke-width="0" fill="transparent"></circle>
+              <text transform="matrix(1 0 0 1 195.79 160.4668)" fill="#FFFFFF" font-family="'gotham-book'" class="circle_text" font-size="28.9263">+</text>
+    </g>
+
+    <g>
+        <text transform="matrix(1 0 0 1 67.873 147.1504)"><tspan x="0" y="0" fill="#FFFFFF" font-family="'gotham-book'" font-size="18.2127">Knowledge</tspan><tspan x="-39.102" y="21.855" fill="#FFFFFF" font-family="'gotham-book'" font-size="18.2127">Through Cycles</tspan></text>
+    </g>
+<!-- knowledge through cycles -->
+
+
+
+
+    <line fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" x1="272.918" y1="117.156" x2="251.539" y2="93.56"/>
+
+  <g class="dynamic">
+        <path fill="#FFFFFF" d="M240.199,69.568c7.481,0,13.568,6.086,13.568,13.567c0,7.481-6.086,13.568-13.568,13.568
+            c-7.481,0-13.567-6.087-13.567-13.568C226.632,75.655,232.718,69.568,240.199,69.568 M240.199,64.568
+            c-10.255,0-18.567,8.312-18.567,18.567c0,10.254,8.312,18.568,18.567,18.568c10.255,0,18.568-8.314,18.568-18.568
+            C258.767,72.881,250.454,64.568,240.199,64.568L240.199,64.568z"/>
+
+     <circle class="circle" cx="240.199" cy="83.09" r="14" stroke="white" stroke-width="0" fill="transparent"></circle>
+    <text transform="matrix(1 0 0 1 231.9082 90.5601)" fill="#FFFFFF" font-family="'gotham-book'" class="circle_text" font-size="28.9263">+</text>
+    </g>
+
+    <g>
+        <text transform="matrix(1 0 0 1 130.7334 66.8198)" fill="#FFFFFF" font-family="'gotham-book'" font-size="18.2127">Dynamic</text>
+    </g>
+
+<!-- Dynamic -->
+
+
+    <line fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" x1="322.658" y1="103.223" x2="322.658" y2="75.518"/>
+
+
+
+    <g class="global">
+        <path fill="#FFFFFF" d="M322.658,44.142c7.481,0,13.567,6.086,13.567,13.567s-6.086,13.567-13.567,13.567
+            S309.09,65.19,309.09,57.709S315.177,44.142,322.658,44.142 M322.658,39.142c-10.256,0-18.568,8.313-18.568,18.567
+            c0,10.256,8.312,18.567,18.568,18.567c10.255,0,18.567-8.312,18.567-18.567C341.226,47.455,332.913,39.142,322.658,39.142
+            L322.658,39.142z"/>
+            <circle class="circle" cx="322.658" cy="57.664" r="14" stroke="white" stroke-width="0" fill="transparent"></circle>
+             <text transform="matrix(1 0 0 1 314.3652 65.1343)" fill="#FFFFFF" font-family="'gotham-book'" class="circle_text" font-size="28.9263">+</text>
+
+    </g>
+ <g>
+        <text transform="matrix(1 0 0 1 293.5273 25.8813)" fill="#FFFFFF" font-family="'gotham-book'" font-size="18.2127">Global</text>
+    </g>
+
+    <!-- global --> 
+
+
+
+    <line fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" x1="372.397" y1="117.156" x2="393.776" y2="93.56"/>
+<g class="activism">
+        <path fill="#FFFFFF" d="M405.116,69.568c7.481,0,13.568,6.086,13.568,13.567c0,7.481-6.087,13.568-13.568,13.568
+            c-7.48,0-13.566-6.087-13.566-13.568C391.55,75.655,397.636,69.568,405.116,69.568 M405.116,64.568
+            c-10.255,0-18.566,8.312-18.566,18.567c0,10.254,8.312,18.568,18.566,18.568s18.568-8.314,18.568-18.568
+            C423.685,72.881,415.371,64.568,405.116,64.568L405.116,64.568z"/>
+             <circle class="circle" cx="405.116" cy="83.09" r="14" stroke="white" stroke-width="0" fill="transparent"></circle>
+             <text transform="matrix(-1 0 0 1 413.4062 90.5601)" fill="#FFFFFF" font-family="'gotham-book'" class="circle_text" font-size="28.9263">+</text>
+    </g>
+
+
+ <g>
+        <text transform="matrix(1 0 0 1 433.9512 66.8208)" fill="#FFFFFF" font-family="'gotham-book'" font-size="18.2127">Activism</text>
+    </g>
+    
+    <!-- activisim --> 
+
+
+
+  <line fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" x1="398.557" y1="155.039" x2="425.637" y2="153.901"/>
+
+
+ <g class="selection">
+        <path fill="#FFFFFF" d="M441.234,138.478c7.482,0,13.569,6.086,13.569,13.566c0,7.481-6.087,13.567-13.569,13.567
+            c-7.48,0-13.565-6.086-13.565-13.567C427.669,144.563,433.754,138.478,441.234,138.478 M441.234,133.478
+            c-10.254,0-18.565,8.312-18.565,18.566c0,10.254,8.312,18.567,18.565,18.567c10.256,0,18.569-8.313,18.569-18.567
+            C459.804,141.789,451.49,133.478,441.234,133.478L441.234,133.478z"/>
+
+     <circle class="circle" cx="441.234" cy="152" r="14" stroke="white" stroke-width="0" fill="transparent"></circle>
+    <text transform="matrix(-1 0 0 1 449.5254 160.4668)" fill="#FFFFFF" font-family="'gotham-book'" class="circle_text" font-size="28.9263">+</text>
+    </g>
+   
+    <g>
+        <text transform="matrix(1 0 0 1 476.8262 147.1504)"><tspan x="0" y="0" fill="#FFFFFF" font-family="'gotham-book'" font-size="18.2127">Company</tspan><tspan x="0" y="21.855" fill="#FFFFFF" font-family="'gotham-book'" font-size="18.2127">Selection</tspan></text>
+    </g>
+   
+   <!-- selection --> 
+  
+</g>
+</svg>

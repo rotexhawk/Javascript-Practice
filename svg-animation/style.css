@@ -1,0 +1,31 @@
+
+.container{
+	width: 99.25%;
+    box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 5px 35px 0px rgba(0,0,0,0.4);
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 5%;
+    background-color: tomato;
+    -webkit-font-smoothing: antialiased;
+    color: white;
+    box-sizing: border-box;
+
+}
+
+.underline-text{
+	border-bottom: 1px solid;
+}
+
+.cycler {
+    margin-top: 40px;
+}
+
+.white_text * {
+  color: white !important;
+}
+
+.knowledge, .dynamic, .global, .activism, .selection{
+	cursor: pointer;
+}
