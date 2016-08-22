@@ -1,7 +1,7 @@
 /**
 *  Javascript Carousel
 *  Author: Yasin Yaqoobi
-*  Project Goal: Build a really simple slider using javascript timer and css transition. 
+*  Project Goal: Build a tic-tac-toe game with javascript.
 *  Date: 07/09/16
 **/
 var tictoe = (function(){
@@ -29,18 +29,18 @@ var tictoe = (function(){
 		makeMove: function(gameBoard){
 			
 			var gameBoard = gameBoard.children[0]; 
-			var index = this.toBlockIndex(gameBoard); 
+			var index = this.toBlockIndex(gameBoard); // get index to block
 
 
 			if (this.computerTurn()){
 				if (!gameBoard.children[4].hasChildNodes()){
 					drawPlayerMarker(gameBoard.children[4]);  // first try to mark the middle
 				}
-				else if (index != -1 && !gameBoard.children[index].hasChildNodes()){
-					drawPlayerMarker(gameBoard.children[index]);
+				else if (index != -1 && !gameBoard.children[index].hasChildNodes()){ // If block index is not -1 it means there is an index we need to block.
+					drawPlayerMarker(gameBoard.children[index]); // block that index
 				}
 				else{
-					counter = 2;  // second try to mark the even child / corners
+					counter = 2;  // if there is nothing to block, try to mark the even child / corners
 					while(counter){
 						for (var i = 0; i < gameBoard.children.length; i+= counter){
 							var elm = gameBoard.children[i]; 
@@ -59,7 +59,7 @@ var tictoe = (function(){
 			if (this.moves.human.length < 2){ // if human hasn't made two moves don't worry about blocking. 
 				return -1; 
 			}
-			debugger;
+			
 			for (var i = 0; i < 2; i++){
 			
 			var lastMove = this.moves.human[this.moves.human.length - (i + 1)]; 
@@ -70,7 +70,7 @@ var tictoe = (function(){
 			
 			diff = Math.abs(lastMove-secondLastMove); 
 
-			console.log(diff);
+			
 
 			if (diff === 1){
 				if (min - 1 >= 0){

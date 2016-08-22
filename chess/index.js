@@ -1,13 +1,21 @@
+/**
+*  Javascript Chess
+*  Author: Yasin Yaqoobi
+*  Project Goal: Learn how to create a flexible chessboard, which we will turn into a full chess game. 
+*  Date: 07/09/16
+**/
+
 
 var chess = (function(){
 
-var board; 
-var colors = ['blue','black']; 
-var labelPosition = {num: 8, alpha: 97};
-var squarePosition = {num: 9, alpha:96}; 
-var settings; 
-var pieces = {
+var board; // our dom board object
+var colors = ['white','#ccc5c5'];  // default colors for squares
+var labelPosition = {num: 8, alpha: 97}; 
+var squarePosition = {num: 9, alpha:96}; // starting position for labels which starts at 8 and character A
+var settings; // Configurations that's passed to us.
 
+// chess pieces default positions and images
+var pieces = {
 	rook: {
 		player2: {image:'bR.png', positions: ['a8','h8']},
 		player1: {image:'wR.png', positions: ['a1','h1']}
@@ -34,7 +42,7 @@ var pieces = {
 	}
 };
 
-
+/** Initialize our game **/ 
 function init(config){
 	settings = config;
 	var container = document.querySelector(settings.selector); 
@@ -45,7 +53,7 @@ function init(config){
 	
 }
 
-
+// Set the Images for our chess pieces if the user has passed in different images. 
 function initPieces(settings){
 	if (settings && settings.pieces && settings.pieces.images){
 		for (var prop in pieces){
@@ -59,9 +67,8 @@ function initPieces(settings){
 
 }
 
-
+/** Draw the board **/
 function drawBoard(container){
-	
 	board = document.createElement('ul'); 
 	for (var i = 0; i < 64; i++){
 		var squarePosition = setSquarePosition(i);
@@ -81,10 +88,9 @@ function setSquarePosition(index){
 	return String.fromCharCode(squarePosition.alpha) +  squarePosition.num;
 }
 
-// given i.e a8 return the right piece image
+// Draw each piece given the position of square. i.e a8 return the right piece image
 function drawPiece(position){
 	var image = ''; 
-	
 	for (var prop in pieces){
 		var elm = pieces[prop];
 		for (var pos in elm){	
@@ -96,7 +102,7 @@ function drawPiece(position){
 	return image; 
 }
 
-
+/** Set the labels if the user has set labels to true **/
 function setLabels(index){
 	var label = '';
 	if (!settings.showlabels){
@@ -115,14 +121,13 @@ function setLabels(index){
 }
 
 
-
+/** Set the color of the board **/
 function setColors(settings){
 	if (!settings.colors || settings.colors.length <= 0){  // if colors aren't specified or the array is empty do nothing. 
 		return; 
 	}
 
 	if (settings.colors.length > 1){ // If two or more colors are passed get the first two and set our colors array. 
-
 		colors = settings.colors.slice(0,2); 
 		return;
 	}
@@ -138,9 +143,6 @@ function setColors(settings){
 			colors[1] = rgb.toRGB(); 
 		}
 	}
-
-	console.log(colors);
-
 }
 
 

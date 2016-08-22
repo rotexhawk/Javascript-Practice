@@ -32,7 +32,7 @@ $.get('images/cycler.svg', function(data){
 /** Setup the cycler - call animation function **/ 
 function setupCycler(data){
 var oSerializer = new XMLSerializer();   // init XML Serializer
-var svg = oSerializer.serializeToString(data); // Get #document - xml that was read from the svg file and convert it to jquery string 
+var svg = oSerializer.serializeToString(data); // Get #document - xml that was read from the svg file and convert it to dom element 
     
      $('.cycler').html(svg);
 
