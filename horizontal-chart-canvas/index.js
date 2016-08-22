@@ -1,25 +1,32 @@
 /**
 *  Javascript Carousel
 *  Author: Yasin Yaqoobi
-*  Project Goal: Build a really simple slider using javascript timer and css transition. 
+*  Project Goal: Draw a horizontal chart on canvas. 
 *  Date: 07/09/16
 **/
 
 var Charts = (function(){
 
 var ctx; 
-var canvas; 
-var canvasData = {}; 
+var canvas; // html canvas
+var canvasData = {}; // 
 var mousePositions = [];
 
 function init(canvas, chart){
 	initCanvas(canvas); 
 	setupCanvas(chart);
-	if (chart.type.localeCompare('HorizontalBar') != -1){
+	if (chart.type.localeCompare('HorizontalBar') != -1){ 
+		drawFrame();
+		drawXAxis(chart);
+		drawYAxis(chart);
+		drawChartTitle(chart); 
 		drawHorizontalChart(chart);
 	}
 }
 
+/**
+*  Check to see if we can get the ctx. 
+**/
 function initCanvas(canv){
 	canvas = canv;
 	if (canvas.getContext){
@@ -27,7 +34,9 @@ function initCanvas(canv){
 	}
 }
 
-
+/**
+* Do some calculation based on chart data passed in, so we can call these values while drawing our chart. 
+**/
 function setupCanvas(chart){
 	canvasData = {
 		get maxValue(){
@@ -77,22 +86,24 @@ function setupCanvas(chart){
 		}
 
 	};
-	console.log(canvasData);
+	
 }
 
 
-
+/**
+* This method loops through the data that is passed in. It get's the horizontal bar value and starts from the left of the canvas and  
+* incremently draws the bar until the bar value is reached. The purpose of setTimeout is to put our drawins in event loop otherwise, 
+* javascript will run through the loops and draw all the charts right away. To increase the speed of our drawing change n+=0.2 to a higher value.
+**/
 function drawHorizontalChart(chart){
-	drawFrame();
-	drawXAxis(chart);
-	drawYAxis(chart);
-	drawChartTitle(chart); 
+	
 	var barValue; 
 	var position = {x:canvasData.beginX+1, y: 0};
 
 	for (var i = chart.data.labels.length-1; i >= 0; i--){
 		
-		for (var n = 0; n <= chart.data.datasets[0].data[i]; n+=0.4){
+		for (var n = 0; n <= chart.data.datasets[0].data[i]; n+=0.2){
+
 			setTimeout(function(index, count){
 				if (index == 0){
 					position.y += canvasData.marginBottom + canvasData.barHeight;
@@ -100,12 +111,12 @@ function drawHorizontalChart(chart){
 					setTooltip(canvasData.beginX, barValue * canvasData.scaleRatio + canvasData.yLabelsWidth,position.y, position.y + canvasData.barHeight, chart.data.labels[count], count, barValue);
 				}
 				ctx.fillStyle = chart.data.datasets[0].backgroundColor[count]; 
-				console.log(index);
+				
 				ctx.fillRect(position.x, position.y, index * canvasData.scaleRatio , canvasData.barHeight);
 
 				
 
-			}, 1000, n, i); 
+			}, 0, n, i); 
 
 
 		}
@@ -114,12 +125,16 @@ function drawHorizontalChart(chart){
 
 }
 
+/**
+* Draw Chart Titles
+*/
 function drawChartTitle(chart){
 	ctx.font = "16px serif";
 	ctx.fillText(chart.data.datasets[0].label, (canvasData.innerWidth)/2, canvasData.legendsHeight / 2);
 	
 }
 
+/** Draw the chart frame **/
 function drawFrame(){
 	ctx.beginPath();
 	ctx.moveTo(canvasData.beginX, canvasData.beginY);   // (30, 15)
@@ -128,6 +143,7 @@ function drawFrame(){
 	ctx.stroke();
 }
 
+/** Draw Y-axis **/
 function drawYAxis(chart){
 	ctx.fillStyle = 'black';
 	ctx.font = "14px serif";
@@ -143,6 +159,7 @@ function drawYAxis(chart){
 	}
 }
 
+/** Draw X-axis **/
 function drawXAxis(chart){
 	
 	var textRatio = (canvasData.innerWidth - 20) / canvasData.maxValue;
@@ -160,7 +177,7 @@ function drawXAxis(chart){
 
 }
 
-
+/** Save the bar position and it's height, width, label and value so mouse move can get these values easily. **/
 function setTooltip(beginX, endX, beginY, endY, label, index, barValue){
 
 	mousePositions[index] = {
@@ -174,18 +191,20 @@ function setTooltip(beginX, endX, beginY, endY, label, index, barValue){
 }
 
 
+/** Show tooltip if the mouse is over a bar **/
 $('#myChart').mousemove(function(event){
 		
 		for (var i = 0; i < mousePositions.length; i++){
 			var posObj = mousePositions[i];
 			if (!posObj){return false;}
-		if (event.offsetX >= posObj.beginX && event.offsetX <= posObj.endX && 
+
+		if (event.offsetX >= posObj.beginX && event.offsetX <= posObj.endX &&  // Check to see if the mouse is on a bar
 			event.offsetY >= posObj.beginY && event.offsetY <= posObj.endY
 			){
 
-			if ($('#toolTip').length <= 0){
+			if ($('#toolTip').length <= 0){ // If there is no tooltip already.
 			
-				var toolTip = $('<div id="toolTip">' + posObj.label + ': ' + posObj.value + '</div>'); 
+				var toolTip = $('<div id="toolTip">' + posObj.label + ': ' + posObj.value + '</div>');  // create a tooltip dom elm.
 					toolTip.css({
 						'position': 'absolute', 
 						'display': 'block', 
@@ -198,7 +217,7 @@ $('#myChart').mousemove(function(event){
 						'top': event.pageY,
 					}); 
 				
-					$('.charts-area').append(toolTip); 
+					$('.charts-area').append(toolTip);  // add it to the end of .charts-area
 				}
 				return false;
 		}
@@ -209,11 +228,6 @@ $('#myChart').mousemove(function(event){
 	}
 		
 });
-
-
-
-
-
 
 
 var publicApi = {

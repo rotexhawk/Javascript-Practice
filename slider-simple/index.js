@@ -73,7 +73,7 @@ document.ready = function(){
 
 /**
 * This method changes the specified style from all the list elements. 
-* You pass in styleName and Value to change. If not value is provided it is set to inherit.
+* You pass in styleName and Value to change. If no value is provided it is set to inherit.
 *
 **/
 	function changeStyle(styleName, styleVal){
@@ -85,7 +85,7 @@ document.ready = function(){
 	}
 
 	/*
-	* we are using appendChild. We can do the same with innerHTML but it makes browser to redraw dom.
+	* we are using appendChild. We can do the same with innerHTML but it makes browser redraw dom.
 	* 
 	**/
 	function setupSlideButtons(){

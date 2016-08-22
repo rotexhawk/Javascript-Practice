@@ -12,6 +12,7 @@
 	width: 852px;
 	margin: 0 auto;
 	overflow: hidden;
+	border: 1px solid #c5c2c2;
 }
 #carousel{
 	list-style-type: none;
@@ -27,6 +28,9 @@
 	display: inline-block;
 	width: 142px;
 	position: absolute;
+	padding: 0 5px;
+	overflow: hidden;
+	box-sizing: border-box;
 
 }
 

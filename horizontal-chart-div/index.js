@@ -1,7 +1,7 @@
 /**
 *  Javascript Carousel
 *  Author: Yasin Yaqoobi
-*  Project Goal: Build a really simple slider using javascript timer and css transition. 
+*  Project Goal: Build a simple horizontal chart with divs.  
 *  Date: 07/09/16
 **/
 

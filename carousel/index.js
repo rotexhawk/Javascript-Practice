@@ -14,12 +14,12 @@ document.ready = function(){
 
 	setInterval(startCarousel,4000); // slide every 4 second. 
 
-// getting elements childnodes is not consistent. Will also list childspace so we have to manuall check. If we use document.querSelector() like the next function we don't need to check. 
+// getting elements childnodes is not consistent. Will also list child [space] so we have to manuall check. If we use document.querSelectorAll() like the next function we don't need to check. 
 
 function calculateElementPosition(){
 	var left = 0; 
 	Array.prototype.forEach.call(carousel.childNodes, function(elm){
-		if (elm.nodeName == 'LI'){         
+		if (elm.nodeName === 'LI'){         
 			elm.style.left = left + 'px'; 
 			left += 142; 
 		}
@@ -37,7 +37,7 @@ function startCarousel(){
 
 	setTimeout(function(){	 // replace the carousel elements from the array but wait one second for the slide transition to complete. The slide effect happens because we declared css obove. 
 	
-	carousel.innerHTML = '';
+	carousel.innerHTML = ''; // Empty the #Carousel and add the nodeList again which removes the first element and adds it to the end.
 	nodeList.forEach(function(elm){
 		carousel.innerHTML += elm.outerHTML; 
 	}); 
