@@ -1,18 +1,18 @@
 /**
 *  Javascript Calculator
 *  Author: Yasin Yaqoobi
-*  Project Goal: Utilize Event propogation and Object Creation. Shhh Eval is your friend this time!
+*  Project Goal: Utilize Event propogation and Object Creation. Eval is your friend this time!
 *  Be careful! There is no security check for eval. 
 **/
 
 
 document.ready = function(){
 
+
 var calculator = document.getElementById('calculator');
 
 var screen = document.getElementById('screen'); 
 
-var calc = new Calculator(); 
 
 calculator.addEventListener('click', function(event){
 	if (event.target.nodeName == 'LI'){  // list item was clicked
@@ -42,6 +42,24 @@ function process(event){
 	screen.innerHTML += str; 
 
 }
+
+document.addEventListener('keydown',function(event){
+	
+	if (event.keyCode === 8 && event.target.id != 'screen'){ // backspace is pressed so remove one from calc; 
+		event.preventDefault(); 
+		calc.array.pop();
+		screen.innerHTML = calc.array.join('');
+	}
+});
+
+screen.addEventListener('keyup',function(event){
+	calc.array = this.innerHTML.split(''); 
+});
+
+
+}();
+
+
 
 function Calculator(){
 	this.array = [];
@@ -75,21 +93,10 @@ Calculator.prototype.clearEverything = function(){
 		this.array = [];
 	};
 
-document.addEventListener('keydown',function(event){
-	
-	if (event.keyCode === 8 && event.target.id != 'screen'){ // backspace is pressed so remove one from calc; 
-		event.preventDefault(); 
-		calc.array.pop();
-		screen.innerHTML = calc.array.join('');
-	}
-});
 
-screen.addEventListener('keyup',function(event){
-	calc.array = this.innerHTML.split(''); 
-});
+var calc = new Calculator(); 
 
-
-}();
+// module.exports = calc;  
 
 
 
