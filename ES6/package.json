@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0"
+  },
+  "scripts": {
+    "build": "babel src -d output",
+    "watch": "babel src --watch -d output"
+  }
+}
