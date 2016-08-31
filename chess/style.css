@@ -12,7 +12,6 @@
 }
 
 #chessBoard{
-	border: 1px solid gray;
 	width: 500px;
 	height: 500px; 
 	margin: 0 auto; 
@@ -20,6 +19,7 @@
 }
 
 #chessBoard ul{
+	border: 1px solid gray;
 	list-style-type: none; 
 	margin: 0 auto; 
 	padding: 0;

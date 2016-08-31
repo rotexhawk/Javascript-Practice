@@ -20,13 +20,14 @@ Chess.prototype.gameState = {
 				pawn: ['a7','b7','c7','d7','e7','f7','g7','h7'], 
 				rook: ['a8','h8'], 
 				knight: ['b8','g8'], 
-				bishop: ['a6','f8'], 
+				bishop: ['c8','f8'], 
 				queen: ['d8'],
 				king: ['e8']
 			}
 		}	 
 };
 
+/** Check if the player will be checked if he moves there **/ 
 Chess.prototype.willBeChecked = function(end){
 	 var oppositePlayer = this.gameState.currentPlayer === 'player1' ? 'player2' : 'player1';
 	 var pieces = this.gameState[oppositePlayer].pieces; 
@@ -44,18 +45,29 @@ Chess.prototype.willBeChecked = function(end){
 	 	}
 	 }
 
-	 return false;
+	 return false;	 
 }
 
 
+/** Test if the player is check so we can stop the player from moving other pieces **/ 
+Chess.prototype.isChecked = function(){
+	var position = this.gameState[this.getCurrentPlayer()].pieces.king; 
+	var end = $('[data-square="' + position + '"]');
+	return this.willBeChecked(end);
+}
+
+
+/** Switch the player every time a move is successfull **/ 
 Chess.prototype.switchPlayer = function(){
 	this.gameState.currentPlayer = this.gameState.currentPlayer === 'player1' ? 'player2' : 'player1';
 }
 
+/** Get the Current Player **/
 Chess.prototype.getCurrentPlayer = function(){
 	return this.gameState.currentPlayer;
 }
 
+/** Check to see if it is players turn **/ 
 Chess.prototype.isPlayersTurn = function(startSquare){
 	if (this.getPlayerAtSquare(startSquare) === this.getCurrentPlayer()){
 		return true;
@@ -69,15 +81,17 @@ Chess.prototype.highlightMove = function(start){
 	
 }
 
-
+/** Update the gamestate object with the new move position **/ 
 Chess.prototype.movePiece = function(start,end){
 	start = this.getSquareProperties(start); 
 	end = this.getSquareProperties(end);
 	var index = this.gameState[this.getCurrentPlayer()].pieces[start.pieceName].indexOf(start.dataSquare);
+	console.log(index);
 	this.gameState[this.getCurrentPlayer()].pieces[start.pieceName][index] = end.dataSquare;
+	console.log(this.gameState);
 }
 
-
+/** Get the common square properties so we can easily call them in other functions **/ 
 Chess.prototype.getSquareProperties = function (square){
 	if (!this.getSquarePosition(square)){
 		return square; 
@@ -121,10 +135,13 @@ Chess.prototype.getPieceAtSquare = function(square) {
 	}
 }
 
-
+// Check if a move is valid **/ 
 Chess.prototype.isValidMove = function(startSquare, endSquare){
 	if (this.getPlayerAtSquare(startSquare) === this.getPlayerAtSquare(endSquare)){ // check to see if the pieces don't belong to the same player
 		return false;
+	}
+	else if (this.getPieceAtSquare(startSquare) != 'king' && this.isChecked()){ // if you are checked don't allow the pieces except the king to move. 
+		return false; 
 	}
 	else if (!this.moveInRange(startSquare, endSquare)){
 		return false;
@@ -134,7 +151,7 @@ Chess.prototype.isValidMove = function(startSquare, endSquare){
 	return true; 
 }
 
-
+/** Check to see if the move is in range of the piece. Meaning the player is not dragging and dropping the elements everywhere **/ 
 Chess.prototype.moveInRange = function(startSquare, endSquare, skipCheckTest){
 	
 	var start = this.getSquareProperties(startSquare); 
@@ -160,6 +177,10 @@ Chess.prototype.moveInRange = function(startSquare, endSquare, skipCheckTest){
 	}
 }	
 
+/** 
+Move the pawn. If it's player1 move forward, If player two decrease the numeric index .ie reflection.
+AllowedRange is two if player hasn't made first move otherwise it is +-1 depending on the player. 
+ **/ 
 Chess.prototype.movePawn = function(start,end){
 
 	var range = start.player === 'player1' ? 1 : -1; 
@@ -178,7 +199,7 @@ Chess.prototype.movePawn = function(start,end){
 			return true;
 		}
 
-		else if ( Math.abs(start.ascii - end.ascii) === 1 &&  end.player !== undefined){ // if something is front move diagnoally.
+		else if ( Math.abs(start.ascii - end.ascii) === 1 &&  end.player !== undefined){ // if something is in front move diagnollay to eat the opposing players piece.
 			return true;
 		}
 			
@@ -188,6 +209,7 @@ Chess.prototype.movePawn = function(start,end){
 }
 
 
+/** Move the Rook horizontally or vertically **/ 
 Chess.prototype.moveRook = function(start,end){
 	if (start.numeric === end.numeric){
 		if (this.checkHorizontally(start,end)){
@@ -199,7 +221,7 @@ Chess.prototype.moveRook = function(start,end){
 	}
 }
 
-
+/** Move the king, +1 -1 in any direction and check to see if he will be checked there **/ 
 Chess.prototype.moveKing = function(start,end, skipCheckTest){
 
 	if (!skipCheckTest && this.willBeChecked(end)){
@@ -221,7 +243,7 @@ Chess.prototype.moveKing = function(start,end, skipCheckTest){
 	}
 }
 
-
+/** Queen can move infinte in any direction except horse jump **/ 
 Chess.prototype.moveQueen = function(start,end){
 
 	if (start.ascii === end.ascii){
@@ -245,7 +267,7 @@ Chess.prototype.moveQueen = function(start,end){
 
 }
 
-
+/** Special rule for horse/knight jump. **/
 Chess.prototype.moveKnight = function(start,end){
 	var asciiDiff = Math.abs(start.ascii - end.ascii); 
 	var numericDiff = Math.abs(start.numeric - end.numeric);
@@ -254,7 +276,7 @@ Chess.prototype.moveKnight = function(start,end){
 	}
 }
 
-
+/** Given the start and end position it computes wether the piece can move there horizontally. **/
 Chess.prototype.checkHorizontally = function(start,end){
 
 	var max = Math.max(start.ascii, end.ascii); 
@@ -270,7 +292,7 @@ Chess.prototype.checkHorizontally = function(start,end){
 
 }
 
-
+/** Given the start and end position it computes wether the piece can move there vertically. **/
 Chess.prototype.checkVertically = function(start,end){
 
 	var max = Math.max(start.numeric, end.numeric); 
@@ -286,7 +308,7 @@ Chess.prototype.checkVertically = function(start,end){
 	return true; 
 }
 
-
+/** Check if the vertical move is valid **/ 
 Chess.prototype.checkDiagonally = function(start,end){
 	
 	var max = Math.max(start.ascii, end.ascii); 

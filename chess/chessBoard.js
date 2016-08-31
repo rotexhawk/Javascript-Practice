@@ -70,8 +70,19 @@ function drawBoard(){
 	for (var n = 0; n < defaultSettings.selectors.length; n++){
 	
 	var board = document.createElement('ul'); 
+	
+	var messageBoard = document.createElement('div');
+	messageBoard.className = 'messageBoard msg-player1'; 
+	messageBoard.innerHTML = '<h3 class="message"></h3>';
+
+	var messageBoard2 = document.createElement('div');
+	messageBoard2.className = 'messageBoard msg-player2';
+	messageBoard2.innerHTML = '<h3 class="message"></h3>';	
+
+
+
 	var container = $(defaultSettings.selectors[n]); 
-	console.log(container);
+	
 	// set them back to default because the position get's changed by setSquarePosition
 	squarePosition = {num: 9, alpha:97};  
 	labelPosition = {num: 8, alpha: 97};
@@ -82,8 +93,13 @@ function drawBoard(){
 		+ dataSquare + '">' + setLabels(i) + getPiece(dataSquare) + '</li>'; 
 		}
 
+		$(messageBoard).appendTo(container); 
 		$(board).appendTo(container);
-	
+		
+
+		; 
+		$(messageBoard2).appendTo(container); 
+
 	}
 }
 
@@ -157,10 +173,10 @@ function setDragDrop(myBoard){
 	$(myBoard).on('dragstart', 'li', function(event){
 
 		if (!chess.isPlayersTurn($(this))){
-			alert('Not your turn');
+			notify('Not your turn!');
 			return false; 
 		}
-
+		clearMessages();
 		originalTarget = event.currentTarget;
 		$(this).css('border', '2px solid yellow');
 		if (defaultSettings.showPath){
@@ -203,7 +219,15 @@ function setDragDrop(myBoard){
 	});
 }
 
+/** Notify shows a message **/
+function notify(message){
+	$('.msg-' + chess.getCurrentPlayer() + ' .message').text(message); 
+}
 
+/** Clear the messages **/
+function clearMessages(){
+	$('.messageBoard .message').text('');
+}
 
 
 var publicApi = {
