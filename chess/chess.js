@@ -2,7 +2,9 @@ function Chess(){
 }
 
 Chess.prototype.gameState = {
-		currentPlayer: 'player1', 
+		currentPlayer: 'player1',
+		previousMove: null,
+		messages: [],
 		player1: {
 			hasMadeFirstMove: false, 
 			pieces:{
@@ -27,9 +29,21 @@ Chess.prototype.gameState = {
 		}	 
 };
 
+Chess.prototype.getMessage = function(){
+	return this.gameState.messages.pop();
+}
+
+Chess.prototype.hasMessage = function(){
+	return this.gameState.messages.length; 
+}
+
+Chess.prototype.addMessage = function(message){
+	return this.gameState.messages.push(message);
+}
+
 /** Check if the player will be checked if he moves there **/ 
 Chess.prototype.willBeChecked = function(end){
-	 var oppositePlayer = this.gameState.currentPlayer === 'player1' ? 'player2' : 'player1';
+	 var oppositePlayer = this.getOppositePlayer();
 	 var pieces = this.gameState[oppositePlayer].pieces; 
 	 var start; 
 
@@ -67,6 +81,10 @@ Chess.prototype.getCurrentPlayer = function(){
 	return this.gameState.currentPlayer;
 }
 
+Chess.prototype.getOppositePlayer = function(){
+	return this.gameState.currentPlayer === 'player1' ? 'player2' : 'player1';
+}
+
 /** Check to see if it is players turn **/ 
 Chess.prototype.isPlayersTurn = function(startSquare){
 	if (this.getPlayerAtSquare(startSquare) === this.getCurrentPlayer()){
@@ -85,11 +103,36 @@ Chess.prototype.highlightMove = function(start){
 Chess.prototype.movePiece = function(start,end){
 	start = this.getSquareProperties(start); 
 	end = this.getSquareProperties(end);
-	var index = this.gameState[this.getCurrentPlayer()].pieces[start.pieceName].indexOf(start.dataSquare);
-	console.log(index);
-	this.gameState[this.getCurrentPlayer()].pieces[start.pieceName][index] = end.dataSquare;
-	console.log(this.gameState);
+	
+	var pieceName = start.pieceName;
+	
+
+	var index = this.gameState[this.getCurrentPlayer()].pieces[pieceName].indexOf(start.dataSquare);
+	
+
+	var currVal = this.gameState[this.getCurrentPlayer()].pieces[pieceName][index]; 
+
+	this.setPreviousMove(pieceName,index,currVal);
+	
+	this.gameState[this.getCurrentPlayer()].pieces[pieceName][index] = end.dataSquare;
+	
 }
+
+Chess.prototype.setPreviousMove = function(pieceName,index,value){
+	this.gameState.previousMove = {pieceName,index,value};
+	
+}
+
+Chess.prototype.getPreviousMove = function(){
+	return this.gameState.previousMove; 
+}
+
+Chess.prototype.reverseMove = function(){
+	var previousMove = this.getPreviousMove();
+	this.gameState[this.getCurrentPlayer()].pieces[previousMove.pieceName][previousMove.index] = previousMove.value; 
+}
+
+
 
 /** Get the common square properties so we can easily call them in other functions **/ 
 Chess.prototype.getSquareProperties = function (square){
@@ -120,10 +163,20 @@ Chess.prototype.getPlayerAtSquare = function(square){
 }
 /** Check if a square has player **/
 Chess.prototype.hasPlayer = function(ascii,numeric){
-	var square = $('[data-square="' + String.fromCharCode(ascii) + numeric + '"]');
-	if (this.getPlayerAtSquare(square) != undefined){
-		return true; 
+
+	var players = ['player1', 'player2'];
+	
+	for (var i = 0; i < players.length; i++){
+		var player = players[i];
+		for (var piece in this.gameState[player].pieces){
+			console.log(piece, this.gameState[player].pieces[piece].indexOf(String.fromCharCode(ascii) + numeric), String.fromCharCode(ascii) + numeric);
+			if (this.gameState[player].pieces[piece].indexOf(String.fromCharCode(ascii) + numeric) != -1){
+
+				return true; 
+			}
+		}
 	}
+
 	return false;
 }
 
@@ -137,18 +190,31 @@ Chess.prototype.getPieceAtSquare = function(square) {
 
 // Check if a move is valid **/ 
 Chess.prototype.isValidMove = function(startSquare, endSquare){
-	if (this.getPlayerAtSquare(startSquare) === this.getPlayerAtSquare(endSquare)){ // check to see if the pieces don't belong to the same player
-		return false;
-	}
-	else if (this.getPieceAtSquare(startSquare) != 'king' && this.isChecked()){ // if you are checked don't allow the pieces except the king to move. 
+	if (!this.isPlayersTurn(startSquare)){
+		this.addMessage('Not your turn!');
 		return false; 
 	}
+
+	if (this.getCurrentPlayer() === this.getPlayerAtSquare(endSquare)){ // check to see if the pieces don't belong to the same player
+		this.addMessage('Can\'t make a move against your own player');
+		return false;
+	}
+
 	else if (!this.moveInRange(startSquare, endSquare)){
 		return false;
 	}
+
 	this.movePiece(startSquare,endSquare);
+	// if player is still checked after the move it means player didn't cover the king. Reverse the move, show the message and return false.
+	if (this.isChecked()){ 
+		this.reverseMove();
+		this.addMessage("Checked!");
+		return false; 
+	}
+
 	this.switchPlayer();
 	return true; 
+
 }
 
 /** Check to see if the move is in range of the piece. Meaning the player is not dragging and dropping the elements everywhere **/ 

@@ -72,12 +72,12 @@ function drawBoard(){
 	var board = document.createElement('ul'); 
 	
 	var messageBoard = document.createElement('div');
-	messageBoard.className = 'messageBoard msg-player1'; 
+	messageBoard.className = 'messageBoard msg-player2'; 
 	messageBoard.innerHTML = '<h3 class="message"></h3>';
 
-	var messageBoard2 = document.createElement('div');
-	messageBoard2.className = 'messageBoard msg-player2';
-	messageBoard2.innerHTML = '<h3 class="message"></h3>';	
+	var messageBoard1 = document.createElement('div');
+	messageBoard1.className = 'messageBoard msg-player1';
+	messageBoard1.innerHTML = '<h3 class="message"></h3>';	
 
 
 
@@ -95,10 +95,8 @@ function drawBoard(){
 
 		$(messageBoard).appendTo(container); 
 		$(board).appendTo(container);
-		
 
-		; 
-		$(messageBoard2).appendTo(container); 
+		$(messageBoard1).appendTo(container); 
 
 	}
 }
@@ -171,11 +169,6 @@ function setDragDrop(myBoard){
 	var originalTarget; 
 
 	$(myBoard).on('dragstart', 'li', function(event){
-
-		if (!chess.isPlayersTurn($(this))){
-			notify('Not your turn!');
-			return false; 
-		}
 		clearMessages();
 		originalTarget = event.currentTarget;
 		$(this).css('border', '2px solid yellow');
@@ -215,13 +208,21 @@ function setDragDrop(myBoard){
 
 			$('.' + squareClass + ' img').appendTo($(this));
 		}
+		else{
+			if (chess.hasMessage()){
+				notify(chess.getMessage(), $(originalTarget), $(this)); 
+				return false; 
+			}
+		}
 	
 	});
 }
 
 /** Notify shows a message **/
-function notify(message){
-	$('.msg-' + chess.getCurrentPlayer() + ' .message').text(message); 
+function notify(message, startSquare, endSquare){
+	var messageBoard = chess.getPlayerAtSquare(endSquare) ? endSquare : startSquare; 
+	
+	$('.msg-' + chess.getPlayerAtSquare(messageBoard) + ' .message').text(message); 
 }
 
 /** Clear the messages **/

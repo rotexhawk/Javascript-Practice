@@ -60,3 +60,12 @@
 	height: 90%;
 	display: block;
 }
+
+.messageBoard{
+	min-height: 60px;
+	overflow: hidden;
+}
+
+h3{
+	margin: 10px 0;
+}
